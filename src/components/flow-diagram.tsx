@@ -419,7 +419,7 @@ export function FlowDiagram() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="overflow-hidden rounded-xl border bg-black/20">
+      <div className="overflow-hidden rounded-xl border bg-[var(--surface-raised)]">
         <svg
           viewBox={`0 0 ${VB.w} ${VB.h}`}
           className="h-auto w-full"
@@ -453,12 +453,12 @@ export function FlowDiagram() {
       </div>
 
       {/* Caption / step strip */}
-      <div className="flex items-center gap-3 rounded-lg border bg-black/20 px-4 py-3">
+      <div className="flex items-center gap-3 rounded-lg border bg-[var(--surface-raised)] px-4 py-3">
         <span
           className="flex size-6 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-semibold"
           style={{
             background: current.color,
-            color: "oklch(0.16 0.01 265)",
+            color: "var(--flow-on-accent)",
           }}
         >
           {stepIndex + 1}
@@ -501,7 +501,7 @@ function Boundaries() {
               rx={b.inner ? 12 : 16}
               className={cn(
                 "stroke-border",
-                b.inner ? "fill-transparent" : "fill-white/[0.012]",
+                b.inner ? "fill-transparent" : "fill-muted/30",
               )}
               strokeWidth={1}
               strokeDasharray={b.inner ? "3 4" : "5 5"}
@@ -541,7 +541,7 @@ function ConnectionLine({ d, active }: { d: string; active: boolean }) {
       d={d}
       fill="none"
       strokeLinecap="round"
-      className={cn(!active && "stroke-border", active && "stroke-white")}
+      className={cn(!active && "stroke-border", active && "stroke-foreground")}
       animate={{
         strokeWidth: active ? 2 : 1,
         opacity: active ? 0.85 : 0.3,
@@ -594,7 +594,9 @@ function NodeView({ node: n, active }: { node: FlowNode; active: boolean }) {
         width={n.w}
         height={n.h}
         rx={12}
-        className={cn(active ? "fill-white/[0.05]" : "fill-white/[0.02]")}
+        className={cn(
+          active ? "fill-foreground/[0.06]" : "fill-foreground/[0.03]",
+        )}
         animate={{
           stroke: active ? n.color : "var(--flow-idle)",
           strokeWidth: active ? 1.8 : 1,
